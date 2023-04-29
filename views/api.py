@@ -24,7 +24,35 @@ def verify_faces():
         'status': 'success',
         'result_message': result['result_message'],
         'result_code': result['result_code'],
-        'result_similarity' : [[float(x) for x in inner_list] for inner_list in result['result_list']]
+        'result_list' : [[float(x) for x in inner_list] for inner_list in result['result_list']]
+    }
+    return jsonify(response), 200
+
+@bp.route('/identify-gender', methods=['POST'])
+def distinguish_gender():
+    target_img = request.files.get('target')  # 이미지 파일 가져오기
+    result = None
+    if target_img:
+        target_img_array = process_image(target_img)
+        project = g.face_ds_project
+        
+        result = project.distinguish(target_img_array)
+        print(result)
+        
+    else:
+        return jsonify({"error": "No image file provided"}), 400
+
+    # 데이터를 처리하고 저장하는 로직 작성 (예: DB에 저장)
+    response = {
+        'status': 'success',
+        'result_message': result['result_message'],
+        'result_code': result['result_code'],
+        'result_list': [
+        {
+            'gender': {k: float(v) for k, v in item['gender'].items()},
+            'dominant_gender': item['dominant_gender']
+        } for item in result['result_list']
+    ]
     }
     return jsonify(response), 200
 
