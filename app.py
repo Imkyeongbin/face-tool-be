@@ -1,10 +1,10 @@
-from flask import Flask, g
+from flask import Flask, g, render_template
 from .extern_lib.AI_16_CP2.face_ds_project import FaceDSProject
 import tracemalloc
 
 tracemalloc.start()
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates/dist', static_folder='templates/dist', static_url_path='')
 face_ds_project = FaceDSProject()
 
 @app.before_request
@@ -14,9 +14,10 @@ def add_face_ds_project_to_g():
 from views import api
 app.register_blueprint(api.bp, url_prefix='/api')
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template("index.html")
 
 if __name__ == '__main__':
     try:
