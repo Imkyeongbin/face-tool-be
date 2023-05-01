@@ -24,8 +24,9 @@ def verify_faces():
         'status': 'success',
         'result_message': result['result_message'],
         'result_code': result['result_code'],
-        'result_list' : [[float(x) for x in inner_list] for inner_list in result['result_list']]
     }
+    if 'result_list' in result and isinstance(result['result_list'], list) and len(result['result_list']) > 0:
+        response['result_list'] = [[float(x + 0.192444 * (x / 0.807555)) for x in inner_list] for inner_list in result['result_list']]
     return jsonify(response), 200
 
 @bp.route('/identify-gender', methods=['POST'])
@@ -47,12 +48,14 @@ def distinguish_gender():
         'status': 'success',
         'result_message': result['result_message'],
         'result_code': result['result_code'],
-        'result_list': [
-        {
-            'gender': {k: float(v) for k, v in item['gender'].items()},
-            'dominant_gender': item['dominant_gender']
-        } for item in result['result_list']
-    ]
     }
+    
+    if 'result_list' in result and isinstance(result['result_list'], list) and len(result['result_list']) > 0:
+        response['result_list'] = [
+            {
+                'gender': {k: float(v) for k, v in item['gender'].items()},
+                'dominant_gender': item['dominant_gender']
+            } for item in result['result_list']
+        ]
     return jsonify(response), 200
 
