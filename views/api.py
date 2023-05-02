@@ -1,4 +1,14 @@
 from flask import Blueprint, g, request, jsonify
+
+import os
+import sys
+
+# 스크립트 파일의 절대 경로를 구합니다.
+script_file_path = os.path.abspath(__file__)
+
+project_root = os.path.join(os.path.dirname(script_file_path), '..')
+sys.path.insert(0, project_root)
+
 from extern_lib.AI_16_CP2.face_ds_project import FaceDSProject
 from views.util.image_processing import process_image
 

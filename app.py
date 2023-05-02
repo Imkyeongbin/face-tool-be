@@ -11,7 +11,7 @@ face_ds_project = FaceDSProject()
 def add_face_ds_project_to_g():
     g.face_ds_project = face_ds_project
 
-from views import api
+from .views import api
 app.register_blueprint(api.bp, url_prefix='/api')
 
 @app.route('/', defaults={'path': ''})
