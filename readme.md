@@ -1,10 +1,21 @@
 ## 실행방법
-
 1. extern_lib에서 `git clone https://github.com/Imkyeongbin/AI_16_CP2.git`
 
-2. 프론트엔드를 dist 폴더 통째로 templates에 복붙하면 동작함.
+2. python 3.9버전을 추천하며, 다음 둘(기본 파이썬 혹은 아나콘다) 중의 하나를 활용하여 가상환경을 만들고 실행한다.
+    1) python -m venv .venv
+        리눅스 => source .venv/Scripts/activate
+        윈도우 => .venv\Scripts\Activate.ps1"
+        
+    2) conda create ai16cp2 (환경명은 임의로 작성해도 됩니다.)
+    conda activate ai16cp2
 
-3. 프로젝트 루트에서 `waitress-serve --listen=*:5000 app:app`
+3. pip install -U pip
+
+4. pip install -r requirements.txt
+   
+5. 프론트엔드를 dist 폴더 통째로 templates에 복붙하면 동작함.
+
+6. 프로젝트 루트에서 `waitress-serve --listen=*:5000 app:app`
 
 #### 이슈
 `flask run`
