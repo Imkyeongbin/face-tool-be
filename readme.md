@@ -17,6 +17,8 @@
 
 6. 프로젝트 루트에서 `waitress-serve --listen=*:5000 app:app`
 
+### Docker를 구성하고 싶을 경우, 루트에서 프론트엔드를 클론하고 npm build이후 실행하시면 됩니다.
+
 #### 이슈
 `flask run`
 는 바로 내려가고
