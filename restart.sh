@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### 실행될 스크립트 위치에 맞춰 변경할 것. ###
-SCRIPT_PATH=~/programming/face-tool-be
+SCRIPT_PATH=~/programming/face-tool/face-tool-be
 
 
 # 스크립트를 실행할 위치로 변경
