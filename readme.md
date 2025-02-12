@@ -19,6 +19,16 @@
 
 ### Docker를 구성하고 싶을 경우, 루트에서 프론트엔드를 클론하고 npm build이후 실행하시면 됩니다.
 
+###
+setup_nginx_waitress.sh 파일을 통해 리눅스 환경에서 서버부팅시 자동 waitress 재시작 및 nginx 설치 및 세팅까지 진행할 수 있음
+다만, 스케줄화 하려면
+`sudo crontab -e`
+에서 아래와 같은 내용을 추가할 것
+
+`0 3 * * * certbot renew --nginx --quiet && systemctl restart nginx && systemctl restart waitress`
+
+`0 4 * * * find /var/log/nginx/*.log -type f -mtime +90 -exec rm {} \;`
+
 #### 이슈
 `flask run`
 는 바로 내려가고
