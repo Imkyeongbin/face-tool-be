@@ -279,3 +279,9 @@ pyrightconfig.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,flask
+
+# `extern_lib` 폴더 내부의 모든 파일을 무시
+extern_lib/*
+
+# 하지만 `extern_lib/__init__.py` 파일은 무시하지 않음
+!extern_lib/__init__.py
