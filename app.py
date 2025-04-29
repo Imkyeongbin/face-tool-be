@@ -16,6 +16,12 @@ from extern_lib.AI_16_CP2.face_ds_project import FaceDSProject
 # tracemalloc.start()
 
 app = Flask(__name__, template_folder='templates/dist', static_folder='templates/dist', static_url_path='')
+
+print('MAX_CONTENT_LENGTH = ', app.config.get('MAX_CONTENT_LENGTH'))
+
+# 여기에 추가
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB 제한 (필요에 따라 조절)
+
 face_ds_project = FaceDSProject()
 
 @app.before_request
